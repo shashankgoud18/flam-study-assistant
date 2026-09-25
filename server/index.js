@@ -38,6 +38,10 @@ ${topic}
 """`;
 }
 
+app.get('/',(req,res)=>{
+  res.send("Backend is Working")
+})
+
 app.post('/api/generate', async (req, res) => {
   const { input } = req.body ?? {};
   const requestedCardCount = Number(req.body?.cardCount);
