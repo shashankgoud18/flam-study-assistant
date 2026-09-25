@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import FlipCard from './FlipCard.jsx';
 
 function FlashcardDeck({ cards }) {
   const [index, setIndex] = useState(0);
@@ -27,12 +28,23 @@ function FlashcardDeck({ cards }) {
         {index + 1} / {cards.length}
       </p>
 
-      <div className="flashcard" onClick={() => setFlipped((f) => !f)}>
-        <p>{flipped ? card.answer : card.question}</p>
-        <span className="flip-hint">
-          {flipped ? 'Click to see question' : 'Click to reveal answer'}
-        </span>
-      </div>
+      <FlipCard
+        flipped={flipped}
+        onFlipChange={setFlipped}
+        ariaLabel={`Flashcard ${index + 1}: ${card.question}`}
+        front={
+          <>
+            <div>{card.question}</div>
+            <span className="flip-card__hint">Click or drag to reveal answer</span>
+          </>
+        }
+        back={
+          <>
+            <div>{card.answer}</div>
+            <span className="flip-card__hint">Click or drag to see question</span>
+          </>
+        }
+      />
 
       <div className="deck-nav">
         <button onClick={prev}>Previous</button>
