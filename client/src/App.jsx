@@ -47,8 +47,12 @@ function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1>Study Assistant</h1>
-        <p>Paste your notes or a topic — get flashcards and a quiz.</p>
+        <div className="brand-line">
+          <span className="brand-mark" aria-hidden="true">F</span>
+          <span>Flam / study lab</span>
+        </div>
+        <h1>Turn notes into momentum.</h1>
+        <p>Paste a topic or your notes. Build a focused set of flashcards, then test what stuck.</p>
       </header>
 
       <PromptInput
