@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #f6f7f9;
+  color: #1a1a1a;
+}
+
+.app {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 16px 64px;
+}
+
+.app-header h1 {
+  margin-bottom: 4px;
+  font-size: 1.6rem;
+}
+
+.app-header p {
+  margin-top: 0;
+  color: #666;
+}
+
+/* Prompt input */
+
+.prompt-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.prompt-input textarea {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border: 1px solid #d0d3d8;
+  border-radius: 8px;
+  resize: vertical;
+  font-family: inherit;
+}
+
+.prompt-input button {
+  align-self: flex-end;
+  padding: 10px 20px;
+  font-size: 1rem;
+  background: #2454ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.prompt-input button:disabled {
+  background: #9aa8d6;
+  cursor: not-allowed;
+}
+
+/* Status text / loading / empty */
+
+.status-text,
+.empty-state {
+  margin-top: 16px;
+  color: #666;
+}
+
+/* Error state */
+
+.error-state {
+  margin-top: 16px;
+  padding: 16px;
+  background: #fdecec;
+  border: 1px solid #f5b5b5;
+  border-radius: 8px;
+  color: #9c2626;
+}
+
+.error-state button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background: #9c2626;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Result view */
+
+.result-topic {
+  margin-bottom: 12px;
+}
+
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.mode-toggle button {
+  padding: 8px 16px;
+  border: 1px solid #d0d3d8;
+  background: white;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.mode-toggle button.active {
+  background: #2454ff;
+  color: white;
+  border-color: #2454ff;
+}
+
+/* Flashcards */
+
+.card-counter {
+  color: #666;
+  margin-bottom: 8px;
+}
+
+.flashcard {
+  min-height: 160px;
+  background: white;
+  border: 1px solid #d0d3d8;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  gap: 12px;
+}
+
+.flashcard p {
+  font-size: 1.15rem;
+  margin: 0;
+}
+
+.flip-hint {
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.deck-nav {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+.deck-nav button {
+  padding: 8px 16px;
+  border: 1px solid #d0d3d8;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Quiz */
+
+.quiz-question {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: white;
+  border: 1px solid #d0d3d8;
+  border-radius: 10px;
+}
+
+.question-text {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.option {
+  padding: 10px 14px;
+  text-align: left;
+  border: 1px solid #d0d3d8;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.option.selected {
+  border-color: #2454ff;
+}
+
+.option.correct {
+  background: #e6f6ea;
+  border-color: #3fae5c;
+}
+
+.option.incorrect {
+  background: #fdecec;
+  border-color: #d95a5a;
+}
+
+.submit-btn {
+  padding: 10px 20px;
+  background: #2454ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn:disabled {
+  background: #9aa8d6;
+  cursor: not-allowed;
+}
+
+.quiz-results {
+  padding: 16px;
+  background: white;
+  border: 1px solid #d0d3d8;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: flex-start;
+}
+
+.quiz-results button {
+  padding: 8px 16px;
+  border: 1px solid #d0d3d8;
+  background: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* Mobile */
+
+@media (max-width: 480px) {
+  .app {
+    padding: 16px 12px 48px;
+  }
+
+  .flashcard {
+    min-height: 140px;
+    padding: 16px;
+  }
+}
