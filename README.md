@@ -42,6 +42,13 @@ cd ..\client
 npm install
 ```
 
+The root `package.json` also provides an optional command for running both apps together. To use it, install the root dependency first:
+
+```bash
+cd ..
+npm install
+```
+
 Get a free Groq API key at https://console.groq.com/keys and paste it into `server/.env`:
 
 ```
@@ -56,6 +63,8 @@ npm run dev
 
 Run that command from `server` in one terminal, then run `npm run dev` from `client` in another terminal.
 
+Alternatively, from the repository root, run `npm start` after installing the root dependency; this starts both development servers with `concurrently`.
+
 Open `http://localhost:5173`. During local development, Vite proxies `/api` requests to `http://localhost:3001`. For separate deployment, copy `client/.env.example` to `client/.env` and set `VITE_API_URL` to the deployed server URL. Set `CLIENT_ORIGIN` in `server/.env` to the deployed client URL.
 
 ## Usage
@@ -67,7 +76,7 @@ Open `http://localhost:5173`. During local development, Vite proxies `/api` requ
 
 ## How failure is handled
 
-- **Malformed JSON / wrong shape** — `validateResult.js` checks every field; anything that doesn't match routes to the error state, never a partial or broken render.
+- **Malformed JSON / wrong shape** — `validateResult.js` checks the required fields, non-empty content, option arrays, and valid answer indexes; anything that doesn't match routes to the error state, never a partial or broken render. The client does not independently recheck the model's requested card count or exact four-option count.
 - **Empty response** — treated as a failure, not an empty-but-valid result.
 - **Slow response** — the backend aborts and returns an error after 20 seconds rather than hanging forever.
 - **Failed request** — shown as an error with a **Try again** button, no crash.
