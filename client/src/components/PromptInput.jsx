@@ -60,17 +60,25 @@ function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, 
         <span className="file-status" role="status">{fileStatus || 'PDF, Word, PowerPoint, or TXT'}</span>
       </div>
       <div className="card-count-row">
-        <label htmlFor="card-count">Flashcards</label>
-        <input
-          id="card-count"
-          type="range"
-          min="3"
-          max="12"
-          value={cardCount}
-          onChange={(e) => onCardCountChange(Number(e.target.value))}
-          disabled={disabled}
-        />
-        <output htmlFor="card-count">{cardCount}</output>
+        <div className="card-count-heading">
+          <label htmlFor="card-count">Flashcards</label>
+          <output htmlFor="card-count">{cardCount} cards</output>
+        </div>
+        <div className="range-control">
+          <span aria-hidden="true">3</span>
+          <input
+            id="card-count"
+            type="range"
+            min="3"
+            max="12"
+            value={cardCount}
+            onChange={(e) => onCardCountChange(Number(e.target.value))}
+            style={{ '--range-progress': `${((cardCount - 3) / 9) * 100}%` }}
+            aria-label="Number of flashcards"
+            disabled={disabled}
+          />
+          <span aria-hidden="true">12</span>
+        </div>
       </div>
       <div className="prompt-footer">
         <span>{value.length > 0 ? `${value.length} characters ready` : 'The more context you add, the sharper the set.'}</span>
