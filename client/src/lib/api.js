@@ -1,6 +1,6 @@
 // The only place in the app that calls our backend. The frontend never
 // talks to Groq directly, and never sees the API key.
-const API_BASE_URL = import.meta.env.BACKEND_URL || '';
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '';
 
 export async function generateStudySet(input, cardCount) {
   const res = await fetch(`${API_BASE_URL}/api/generate`, {
