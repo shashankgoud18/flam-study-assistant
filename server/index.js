@@ -3,7 +3,10 @@ import cors from 'cors';
 import 'dotenv/config';
 
 const app = express();
-const allowedOrigin = process.env.CLIENT_ORIGIN || 'http://localhost:5173';
+const configuredOrigin = process.env.CLIENT_ORIGIN?.trim();
+const allowedOrigin = configuredOrigin
+  ? `${/^https?:\/\//i.test(configuredOrigin) ? '' : 'https://'}${configuredOrigin}`.replace(/\/+$/, '')
+  : 'http://localhost:5173';
 
 app.use(cors({ origin: allowedOrigin }));
 app.use(express.json());
