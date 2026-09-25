@@ -34,8 +34,16 @@ function Quiz({ questions }) {
 
   return (
     <div className="quiz">
-      {activeQuestions.map((q) => (
-        <div key={q.id} className="quiz-question">
+      <div className="quiz-header">
+        <div>
+          <span className="section-label">02 / Check your recall</span>
+          <p className="quiz-title">Make it stick.</p>
+        </div>
+        <span className="quiz-progress">{Object.keys(answers).length} / {activeQuestions.length} answered</span>
+      </div>
+      {activeQuestions.map((q, questionIndex) => (
+        <div key={q.id} className="quiz-question" style={{ '--question-order': questionIndex }}>
+          <span className="question-index">0{questionIndex + 1}</span>
           <p className="question-text">{q.question}</p>
           <div className="options">
             {q.options.map((option, i) => {
@@ -54,6 +62,7 @@ function Quiz({ questions }) {
                   onClick={() => selectAnswer(q.id, i)}
                   disabled={submitted}
                 >
+                  <span className="option-letter" aria-hidden="true">{String.fromCharCode(65 + i)}</span>
                   {option}
                 </button>
               );

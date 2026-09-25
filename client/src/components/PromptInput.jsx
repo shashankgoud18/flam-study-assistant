@@ -3,6 +3,7 @@ import { extractTextFromFile } from '../lib/extractText.js';
 
 function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, disabled }) {
   const [fileStatus, setFileStatus] = useState('');
+  const [isDragging, setIsDragging] = useState(false);
 
   function handleKeyDown(e) {
     // Cmd/Ctrl+Enter submits; plain Enter still inserts a newline in the textarea.
@@ -11,9 +12,7 @@ function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, 
     }
   }
 
-  async function handleFileChange(e) {
-    const file = e.target.files?.[0];
-    e.target.value = '';
+  async function handleFile(file) {
     if (!file) return;
 
     setFileStatus(`Reading ${file.name}...`);
@@ -27,8 +26,33 @@ function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, 
     }
   }
 
+  function handleFileChange(e) {
+    handleFile(e.target.files?.[0]);
+    e.target.value = '';
+  }
+
+  function handleDragOver(e) {
+    e.preventDefault();
+    if (!disabled) setIsDragging(true);
+  }
+
+  function handleDragLeave(e) {
+    if (!e.currentTarget.contains(e.relatedTarget)) setIsDragging(false);
+  }
+
+  function handleDrop(e) {
+    e.preventDefault();
+    setIsDragging(false);
+    if (!disabled) handleFile(e.dataTransfer.files?.[0]);
+  }
+
   return (
-    <div className="prompt-input">
+    <div
+      className={`prompt-input${isDragging ? ' is-dragging' : ''}`}
+      onDragOver={handleDragOver}
+      onDragLeave={handleDragLeave}
+      onDrop={handleDrop}
+    >
       <div className="prompt-heading">
         <div>
           <span className="section-label">01 / Start with anything</span>
@@ -57,7 +81,7 @@ function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, 
           onChange={handleFileChange}
           disabled={disabled}
         />
-        <span className="file-status" role="status">{fileStatus || 'PDF, Word, PowerPoint, or TXT'}</span>
+        <span className="file-status" role="status">{fileStatus || 'Drop a file here or choose one'}</span>
       </div>
       <div className="card-count-row">
         <div className="card-count-heading">
