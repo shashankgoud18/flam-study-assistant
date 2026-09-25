@@ -61,8 +61,8 @@ Open `http://localhost:5173`. During local development, Vite proxies `/api` requ
 ## Usage
 
 1. Open `http://localhost:5173`.
-2. Type a topic (e.g. "Photosynthesis") or paste your notes.
-3. Hit **Generate**.
+2. Type a topic (e.g. "Photosynthesis"), paste notes, or upload a PDF, DOCX, PPTX, or TXT file.
+3. Review or edit the extracted text, then hit **Build study set**.
 4. Switch between **Flashcards** (click a card to flip it) and **Quiz** (answer all questions, submit, then optionally retest just the ones you got wrong).
 
 ## How failure is handled
@@ -81,6 +81,7 @@ I used Claude to help scaffold the project structure, write the Express proxy an
 
 - No streaming — results appear all at once after generation completes.
 - No session persistence — refreshing the page loses your current study set.
+- Uploaded documents are parsed in the browser and must contain selectable text; scanned PDFs and legacy `.doc`/`.ppt` files are not supported.
 - Groq's JSON mode reduces malformed output but doesn't guarantee it, which is why `validateResult.js` still exists as a hard gate.
 - Only tested against the configured Groq model; other providers would need a different request format in `server/index.js`.
 
