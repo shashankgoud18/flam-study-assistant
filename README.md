@@ -62,7 +62,7 @@ Open `http://localhost:5173`. During local development, Vite proxies `/api` requ
 
 1. Open `http://localhost:5173`.
 2. Type a topic (e.g. "Photosynthesis"), paste notes, or upload a PDF, DOCX, PPTX, or TXT file.
-3. Review or edit the extracted text, then hit **Build study set**.
+3. Review or edit the extracted text, choose how many flashcards to generate, then hit **Build study set**.
 4. Switch between **Flashcards** (click a card to flip it) and **Quiz** (answer all questions, submit, then optionally retest just the ones you got wrong).
 
 ## How failure is handled

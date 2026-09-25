@@ -8,6 +8,7 @@ import { validateResult } from './lib/validateResult.js';
 
 function App() {
   const [input, setInput] = useState('');
+  const [cardCount, setCardCount] = useState(6);
   const [status, setStatus] = useState('idle'); // 'idle' | 'loading' | 'error' | 'success'
   const [result, setResult] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
@@ -24,7 +25,7 @@ function App() {
     setErrorMessage('');
 
     try {
-      const raw = await generateStudySet(input);
+      const raw = await generateStudySet(input, cardCount);
       const parsed = validateResult(raw);
 
       if (id !== requestId.current) return; // a newer request has since started
@@ -59,6 +60,8 @@ function App() {
         value={input}
         onChange={setInput}
         onSubmit={handleGenerate}
+        cardCount={cardCount}
+        onCardCountChange={setCardCount}
         disabled={status === 'loading'}
       />
 

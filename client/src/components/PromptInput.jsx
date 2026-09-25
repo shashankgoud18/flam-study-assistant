@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { extractTextFromFile } from '../lib/extractText.js';
 
-function PromptInput({ value, onChange, onSubmit, disabled }) {
+function PromptInput({ value, onChange, onSubmit, cardCount, onCardCountChange, disabled }) {
   const [fileStatus, setFileStatus] = useState('');
 
   function handleKeyDown(e) {
@@ -58,6 +58,19 @@ function PromptInput({ value, onChange, onSubmit, disabled }) {
           disabled={disabled}
         />
         <span className="file-status" role="status">{fileStatus || 'PDF, Word, PowerPoint, or TXT'}</span>
+      </div>
+      <div className="card-count-row">
+        <label htmlFor="card-count">Flashcards</label>
+        <input
+          id="card-count"
+          type="range"
+          min="3"
+          max="12"
+          value={cardCount}
+          onChange={(e) => onCardCountChange(Number(e.target.value))}
+          disabled={disabled}
+        />
+        <output htmlFor="card-count">{cardCount}</output>
       </div>
       <div className="prompt-footer">
         <span>{value.length > 0 ? `${value.length} characters ready` : 'The more context you add, the sharper the set.'}</span>

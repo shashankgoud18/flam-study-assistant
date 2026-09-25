@@ -14,7 +14,7 @@ const MODEL = 'openai/gpt-oss-120b';
 
 // The strict prompt is what makes parsing reliable instead of hopeful:
 // exact shape, exact rules, explicit "no prose".
-function buildPrompt(topic) {
+function buildPrompt(topic, cardCount) {
   return `You are a study assistant. Given the topic or notes below, generate flashcards and a multiple-choice quiz.
 
 Return ONLY valid JSON, with no prose and no markdown code fences, matching EXACTLY this shape:
@@ -25,7 +25,7 @@ Return ONLY valid JSON, with no prose and no markdown code fences, matching EXAC
 }
 
 Rules:
-- Generate 5 to 8 flashcards.
+- Generate exactly ${cardCount} flashcards.
 - Generate 4 to 6 quiz questions.
 - Each quiz question must have exactly 4 options.
 - "correctIndex" is the 0-based index into "options" of the correct answer.
@@ -40,6 +40,10 @@ ${topic}
 
 app.post('/api/generate', async (req, res) => {
   const { input } = req.body ?? {};
+  const requestedCardCount = Number(req.body?.cardCount);
+  const cardCount = Number.isInteger(requestedCardCount)
+    ? Math.min(Math.max(requestedCardCount, 3), 12)
+    : 6;
 
   if (!input || typeof input !== 'string' || !input.trim()) {
     return res.status(400).json({ error: 'Input text is required.' });
@@ -62,7 +66,7 @@ app.post('/api/generate', async (req, res) => {
       },
       body: JSON.stringify({
         model: MODEL,
-        messages: [{ role: 'user', content: buildPrompt(input) }],
+        messages: [{ role: 'user', content: buildPrompt(input, cardCount) }],
         response_format: { type: 'json_object' },
         temperature: 0.4,
       }),

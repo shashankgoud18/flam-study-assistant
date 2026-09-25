@@ -140,6 +140,20 @@ button:focus-visible, textarea:focus-visible, .flashcard:focus-visible {
 .upload-button:hover { background: var(--teal-soft); }
 .upload-button span { font-size: 1rem; line-height: 0.8; }
 .file-status { color: var(--muted); font-size: 0.76rem; }
+.card-count-row { display: flex; align-items: center; gap: 12px; }
+.card-count-row label { color: var(--muted); font-size: 0.82rem; font-weight: 800; }
+.card-count-row input[type="range"] { flex: 1; accent-color: var(--teal); cursor: pointer; }
+.card-count-row output {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--teal-soft);
+  color: var(--teal);
+  font-size: 0.85rem;
+  font-weight: 800;
+}
 .prompt-input button, .submit-btn {
   display: inline-flex;
   align-items: center;

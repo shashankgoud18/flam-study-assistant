@@ -2,11 +2,11 @@
 // talks to Groq directly, and never sees the API key.
 const API_BASE_URL = import.meta.env.VITE_API_URL || '';
 
-export async function generateStudySet(input) {
+export async function generateStudySet(input, cardCount) {
   const res = await fetch(`${API_BASE_URL}/api/generate`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ input }),
+    body: JSON.stringify({ input, cardCount }),
   });
 
   const data = await res.json().catch(() => null);
